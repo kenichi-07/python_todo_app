@@ -1,3 +1,5 @@
+import os
+    
 class ToDoList:
     def __init__(self):
         self.tasks = []
@@ -31,7 +33,12 @@ def main():
         print("3. Display Tasks")
         print("4. Quit")
 
-        choice = input("Enter your choice (1-4): ")
+        if os.environ.get('JENKINS_HOME'):
+            # Jenkins environment, use default choice
+            choice = '4'
+        else:
+            # Interactive environment, prompt for input
+            choice = input("Enter your choice (1-4): ")
 
         if choice == '1':
             task = input("Enter the task: ")
